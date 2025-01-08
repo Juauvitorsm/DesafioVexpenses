@@ -16,7 +16,7 @@ Testes Estatísticos (ANOVA): Realizou-se uma análise de variância (ANOVA) par
 Essas etapas de exploração ajudaram a entender melhor os dados e a planejar a modelagem.
 
 2. Modelo: Implementação Correta de um Modelo Básico de Classificação
-Foi implementado um modelo de Random Forest para prever a variável alvo (Compra), que é binária (0: Não Comprou, 1: Comprou). A escolha do modelo Random Forest foi baseada na sua robustez e eficácia para tarefas de classificação, especialmente quando temos um número razoável de variáveis e queremos lidar com dados de forma eficiente.
+Foi implementado um modelo de Random Forest para prever a variável alvo (Compra), que é binária (0: Não Comprou, 1: Comprou). A escolha do modelo Random Forest foi baseada na sua robustez e eficácia para tarefas de classificação, especialmente quando temos um número razoável de variáveis e queremos lidar com dados de forma eficiente. Além disso é 
 
 A implementação do modelo envolveu as seguintes etapas:
 
