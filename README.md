@@ -28,23 +28,15 @@ Treinamento e Predição: O modelo foi treinado com o conjunto de dados de trein
 
 Avaliação de Desempenho: A acurácia do modelo foi de 66,67%, com valores de precision e recall variando conforme a classe. Isso indica que o modelo teve um bom desempenho para prever a classe "Não Comprou", mas apresentou dificuldades para prever os casos de clientes que realizaram compras.
 
-python
-Copiar código
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, accuracy_score
-
-rf_model = RandomForestClassifier()
-rf_model.fit(X_train, y_train)
-y_pred = rf_model.predict(X_test)
-
-accuracy = accuracy_score(y_test, y_pred)
-report = classification_report(y_test, y_pred)
-print(f'Acurácia: {accuracy}')
-print(f'Relatório de Classificação:\n{report}')
-3. Interpretação: Clareza nas Explicações e Justificativas das Escolhas
 A interpretação dos resultados foi feita de maneira objetiva e clara:
 
 A acurácia do modelo foi usada como um dos principais indicadores de desempenho, mas também foram analisados precision, recall e f1-score, principalmente para a classe 1 (Comprou), para avaliar o quão bem o modelo consegue identificar os compradores.
+
+Uso de hyperparâmetros para testes de métricas no random, afim de chegar relações melhores
+
+Balanceamento
+
+Validação cruzada para melhoria de resultados
 
 Resultados da ANOVA: O teste de ANOVA forneceu uma visão interessante sobre a diferença de compras entre os gêneros, embora a significância estatística não tenha sido forte. Isso indicou que, embora o gênero tenha alguma influência, outros fatores podem ser mais determinantes para a decisão de compra.
 
@@ -53,24 +45,52 @@ A segmentação de usuários através do algoritmo KMeans ajudou a identificar d
 4. Extras: Implementações Adicionais ou Insights Inovadores
 Além da modelagem e análise básica, algumas implementações adicionais foram feitas:
 
-Segmentação de Clientes: O uso do algoritmo KMeans foi importante para dividir os clientes em grupos com comportamentos semelhantes. Isso pode ser útil para personalizar ofertas ou segmentar o mercado de maneira mais eficaz.
 
 Visualizações de Dados: Diversos gráficos foram gerados para visualizar os dados de forma mais intuitiva, como gráficos de dispersão, boxplots, e gráficos de barras. As visualizações foram ajustadas para facilitar a leitura e a interpretação.
-
-Melhoria no Modelo: Para melhorar o modelo, sugere-se a realização de ajustes nos hiperparâmetros do Random Forest, bem como a experimentação com outros algoritmos de aprendizado supervisionado (por exemplo, XGBoost, SVM).
 
 Análise de Outliers: Uma análise de outliers nas variáveis contínuas poderia ser realizada para entender se há clientes cujos comportamentos são extremados e impactam o modelo de maneira negativa.
 
 Conclusões Finais
-O modelo de Random Forest foi implementado com sucesso e obteve uma acurácia de 66,67%, embora existam oportunidades de melhoria no desempenho, especialmente em relação à classe 1 (Comprou).
+ Interpretação Inicial
+Modelo Base (Random Forest): Identificou que o tempo no site e a idade são as variáveis mais relevantes.
+Problema Identificado: Desequilíbrio de classes, levando a baixo desempenho na previsão de compras (classe 1).
+2. Testes e Resultados
+Teste 1 (Modelo Inicial):
 
-A análise exploratória de dados foi bem-feita e proporcionou insights valiosos, como a possível influência do gênero na compra.
+Desempenho Fraco para Classe 1 (Compra):
+f1-score: 0,24
+Precisão: 0,40
+Recall: 0,17
+Problema: Desequilíbrio severo nas classes e métricas inconsistentes.
+Teste 2 (Hiperparâmetros Ajustados):
 
-A segmentação de usuários por KMeans revelou diferentes perfis de clientes, o que pode ser útil para ações de marketing e estratégias de vendas.
+Ajustes:
+n_estimators=50, max_depth=10, min_samples_split=2, min_samples_leaf=4, class_weight='None'.
+Melhoras Moderadas:
+f1-score: 0,38
+Precisão: 0,44
+Recall: 0,33
+Limitação: Melhora limitada, não atingindo o objetivo de capturar compradores.
+Teste 3 (Balanceamento com SMOTE):
 
-O projeto pode ser melhorado com ajustes no modelo, testes de novos algoritmos e análise mais aprofundada dos dados.
+Estratégia Utilizada:
+Balanceamento (SMOTE) com proporção de 0,8 entre não compras e compras.
+Ajustes adicionais no hiperparâmetro de scoring para recall.
+Melhoria Significativa nas Métricas:
+f1-score: 0,78
+Precisão: 0,70
+Recall: 0,88
+Resultado: Modelo ajustado para captar melhor os padrões de compradores.
+3. Melhoria Proposta
+Engenharia de Variáveis:
 
-Este projeto forneceu uma boa base para uma análise de dados de compras e oferece diversas direções para melhorias e otimizações.
+Criar novas variáveis que possam aprimorar as previsões.
+Aumento do Tamanho da Amostra:
+
+Coletar mais dados para análises robustas.
+Ajustes Futuros no Modelo:
+
+Evitar overfitting mantendo o recall alto e equilibrado com outras métricas.
 
 Como Executar
 Clone o repositório:
